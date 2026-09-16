@@ -294,3 +294,20 @@ a {
     background-color: var(--text-inverse);
   }
 }
+
+.hero {
+  border-radius: 40px;
+  background: var(--bg-container) url("../assets/img-hero.webp") center / cover no-repeat;
+}
+
+.hero__container {
+  padding: 100px;
+}
+
+.hero__content {
+  max-width: 530px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}

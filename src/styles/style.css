@@ -432,3 +432,57 @@ a {
   flex-direction: column;
   gap: 16px;
 }
+
+/* About */
+.about {
+  margin-bottom: 100px;
+}
+
+.about__title {
+  margin-bottom: 40px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 430px 120px 430px;
+  grid-template-areas:
+    "top-left    top-right"
+    "top-left    bottom-right"
+    "bottom-left bottom-right";
+  gap: 40px;
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.gallery__item:hover img {
+  transform: scale(1);
+}
+
+.gallery__item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-set);
+  transform: scale(1.1);
+}
+
+.gallery__item--1 {
+  grid-area: top-left;
+}
+.gallery__item--2 {
+  grid-area: bottom-left;
+}
+.gallery__item--3 {
+  grid-area: top-right;
+}
+.gallery__item--4 {
+  grid-area: bottom-right;
+}

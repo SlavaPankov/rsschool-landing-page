@@ -1,0 +1,22 @@
+{
+  "name": "vite-project",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:host": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.9.6",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "modern-normalize": "^3.0.1"
+  }
+}

@@ -1,13 +1,13 @@
 const STORAGE_KEY = 'theme';
 const inputs = document.querySelectorAll('.theme-switch__input');
 
-function applyTheme(theme) {
+const applyTheme = (theme) => {
   if (theme === 'dark') {
     document.documentElement.dataset.theme = 'dark';
   } else {
     delete document.documentElement.dataset.theme;
   }
-}
+};
 
 const savedTheme = localStorage.getItem(STORAGE_KEY) || 'light';
 applyTheme(savedTheme);

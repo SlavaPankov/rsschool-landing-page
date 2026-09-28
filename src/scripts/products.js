@@ -1,38 +1,22 @@
-const formatPrice = (price) => `$${price.toFixed(2)}`;
+import { createElement, formatPrice, resolveImage } from './utils.js';
 
-const imageUrls = import.meta.glob('/src/assets/{coffee,tea,dessert}-*.webp', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
+const createCard = (item, onSelect) => {
+  const { name, description, price, image } = item;
 
-const resolveImage = (path) => {
-  const url = imageUrls[path];
-
-  if (!url) {
-    console.warn(`Catalog image not found: ${path}`);
-  }
-
-  return url ?? '';
-};
-
-const createElement = (tag, className, text) => {
-  const el = document.createElement(tag);
-
-  if (className) {
-    el.className = className;
-  }
-
-  if (text !== undefined) {
-    el.textContent = text;
-  }
-
-  return el;
-};
-
-const createCard = ({ name, description, price, image }) => {
   const li = document.createElement('li');
   const article = createElement('article', 'catalog-item');
+
+  article.tabIndex = 0;
+  article.setAttribute('role', 'button');
+  article.setAttribute('aria-haspopup', 'dialog');
+
+  article.addEventListener('click', onSelect);
+  article.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onSelect();
+    }
+  });
 
   const imgWrapper = createElement('div', 'catalog-item__img-wrapper');
   const img = createElement('img', 'catalog-item__img');
@@ -68,30 +52,34 @@ const createCard = ({ name, description, price, image }) => {
   return li;
 };
 
-const createList = ({ category, items }, isActive) => {
+const createList = (group, isActive, onSelect) => {
   const ul = createElement('ul', 'list-reset catalog-list');
-  ul.dataset.tabId = category;
+  ul.dataset.tabId = group.category;
 
   if (isActive) {
     ul.classList.add('catalog-list--active', 'catalog-list--visible');
   }
 
-  ul.append(...items.map(createCard));
+  ul.append(
+    ...group.items.map((item) =>
+      createCard(item, () => onSelect?.(item, group)),
+    ),
+  );
   return ul;
 };
 
 export const renderCatalog = (
   container,
   data,
-  activeCategory = data[0]?.category,
+  { activeCategory = data[0]?.category, onSelect } = {},
 ) => {
-  if (!container) {
-    return;
-  }
+  if (!container) return;
 
   const fragment = document.createDocumentFragment();
   data.forEach((group) => {
-    fragment.append(createList(group, group.category === activeCategory));
+    fragment.append(
+      createList(group, group.category === activeCategory, onSelect),
+    );
   });
 
   container.replaceChildren(fragment);

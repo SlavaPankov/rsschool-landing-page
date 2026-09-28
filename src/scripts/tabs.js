@@ -50,7 +50,7 @@ export const tabsInit = () => {
   };
 
   tabsList.addEventListener('click', (e) => {
-    const tab = e.target.closest('.tab-item');
+    const tab = e.target.closest('.catalog-tab');
 
     if (tab) {
       activateTab(tab);

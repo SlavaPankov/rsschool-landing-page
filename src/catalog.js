@@ -1,6 +1,7 @@
 import { renderCatalog } from './scripts/products.js';
 import { tabsInit } from './scripts/tabs.js';
 import { initMoreButton } from './scripts/more-button.js';
+import { openProductModal } from './scripts/product-modal.js';
 
 const initCatalog = async () => {
   const container = document.querySelector('.catalog-stack');
@@ -11,7 +12,9 @@ const initCatalog = async () => {
     if (!response.ok)
       throw new Error(`Failed to load menu: ${response.status}`);
 
-    renderCatalog(container, await response.json());
+    renderCatalog(container, await response.json(), {
+      onSelect: openProductModal,
+    });
     tabsInit();
   } catch (error) {
     console.error(error);

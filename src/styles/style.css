@@ -27,8 +27,14 @@
 }
 
 html {
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
 }
+
+html:has(.product-modal[open]) {
+  overflow: hidden;
+}
+
 
 body {
   font-family: 'Inter', sans-serif;
@@ -747,7 +753,7 @@ svg path {
   transition: background-color var(--transition-set), border-color var(--transition-set), color var(--transition-set);
 }
 
-.tab-item:hover, .tab-item--active {
+.tab-item:hover, .tab-item--active, .tab-item:has(:checked) {
   background-color: var(--bg-container);
   border-color: var(--bg-container);
   color: var(--text-inverse);
@@ -765,7 +771,8 @@ svg path {
   align-items: center;
   justify-content: center;
   background-color: var(--border-primary);
-  transition: background-color var(--transition-set);
+  color: var(--text-primary);
+  transition: background-color var(--transition-set), color var(--transition-set);
 }
 
 .catalog-item {
@@ -912,4 +919,95 @@ svg path {
   &[hidden] {
     display: none;
   }
+}
+
+.product-modal {
+  width: min(800px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  background-color: var(--bg-overlay);
+  color: inherit;
+}
+
+.product-modal::backdrop {
+  background-color: rgb(64 63 61 / 0.8);
+}
+
+.product-modal__inner {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  background-color: var(--bg-page);
+}
+
+.product-modal__img-wrapper {
+  display: flex;
+  border-radius: 40px;
+  overflow: hidden;
+  object-fit: contain;
+  flex-shrink: 0;
+  height: 310px;
+
+  @media (max-width: 568px) {
+    display: none;
+  }
+}
+
+.product-modal__img {
+  width: 100%;
+}
+
+.product-modal__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-modal__group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.product-modal__legend {
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.product-modal__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-modal__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-modal__note {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-inverse);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product-modal__note svg {
+  flex-shrink: 0;
 }

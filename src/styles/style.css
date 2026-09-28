@@ -313,6 +313,7 @@ svg path {
 
 /* Header */
 .header {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
@@ -328,14 +329,35 @@ svg path {
 
 .nav {
   @media (max-width: 1024px) {
-    display: none;
+    padding: 222px 40px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    transform: translateX(-101%);
+    background-color: var(--bg-page);
+    transition: transform var(--transition-set), background-color var(--transition-set);
+    z-index: 2;
   }
+}
+
+.nav--open {
+  transform: translateX(0);
 }
 
 .nav-list {
   display: flex;
   align-items: center;
   gap: 40px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 }
 
 /* Footer */
@@ -821,7 +843,17 @@ svg path {
   }
 }
 
+.catalog-link--burger {
+  display: none;
+
+  @media (max-width: 1024px) {
+    display: inline-flex;
+    justify-content: center;
+  }
+}
+
 .burger {
+  position: relative;
   display: none;
   width: 44px;
   height: 44px;
@@ -840,6 +872,21 @@ svg path {
 
 .burger__line {
   display: flex;
+  transition: transform var(--transition-set);
+}
+
+.burger--active .burger__line:first-child {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.burger--active .burger__line:last-child {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
 }
 
 .more-button {

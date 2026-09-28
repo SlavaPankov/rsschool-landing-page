@@ -24,3 +24,14 @@ inputs.forEach((input) => {
     localStorage.setItem(STORAGE_KEY, input.value);
   });
 });
+
+const burger = document.querySelector('.burger');
+
+const toggleMenu = () => {
+  const nav = document.querySelector('.nav');
+
+  nav?.classList.toggle('nav--open');
+  burger?.classList.toggle('burger--active');
+};
+
+burger.addEventListener('click', toggleMenu);

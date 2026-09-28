@@ -174,9 +174,9 @@
       }
     ],
     "sizes": [
-      { "key": "s", "label": "200 ml", "price": 0 },
-      { "key": "m", "label": "300 ml", "price": 0.5 },
-      { "key": "l", "label": "400 ml", "price": 1 }
+      { "key": "s", "label": "50 g", "price": 0 },
+      { "key": "m", "label": "100 g", "price": 1 },
+      { "key": "l", "label": "150 g", "price": 1.5 }
     ],
     "additives": [
       { "name": "Sugar", "price": 0.5 },

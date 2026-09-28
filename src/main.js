@@ -26,12 +26,29 @@ inputs.forEach((input) => {
 });
 
 const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav');
 
-const toggleMenu = () => {
-  const nav = document.querySelector('.nav');
+const isMenuOpen = () => nav.classList.contains('nav--open');
 
-  nav?.classList.toggle('nav--open');
-  burger?.classList.toggle('burger--active');
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    setMenuOpen(false);
+    burger.focus();
+  }
 };
 
-burger.addEventListener('click', toggleMenu);
+const setMenuOpen = (isOpen) => {
+  nav.classList.toggle('nav--open', isOpen);
+  burger.classList.toggle('burger--active', isOpen);
+  burger.setAttribute('aria-expanded', String(isOpen));
+
+  if (isOpen) {
+    document.addEventListener('keydown', handleKeydown);
+  } else {
+    document.removeEventListener('keydown', handleKeydown);
+  }
+};
+
+if (burger && nav) {
+  burger.addEventListener('click', () => setMenuOpen(!isMenuOpen()));
+}

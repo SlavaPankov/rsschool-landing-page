@@ -417,6 +417,10 @@ svg path {
   }
 }
 
+.contacts-list__value address {
+  font-style: normal;
+}
+
 /* Hero */
 .hero {
   margin-bottom: 100px;

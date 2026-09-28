@@ -325,6 +325,7 @@ svg path {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 8px;
 }
 
 .header__right {
@@ -334,11 +335,15 @@ svg path {
 }
 
 .nav {
-  @media (max-width: 1024px) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 768px) {
     padding: 222px 40px;
-    width: 100%;
     position: absolute;
     top: 100%;
+    height: 100dvh;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -359,10 +364,13 @@ svg path {
 .nav-list {
   display: flex;
   align-items: center;
-  gap: 40px;
+  max-width: 450px;
+  width: 100%;
+  justify-content: space-between;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     flex-direction: column;
+    gap: 40px;
   }
 }
 
@@ -851,7 +859,7 @@ svg path {
 }
 
 .catalog-link {
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -859,13 +867,17 @@ svg path {
 .catalog-link--burger {
   display: none;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     display: inline-flex;
     justify-content: center;
   }
 }
 
 .burger {
+  --line-gap: 8px;
+  --line-height: 2px;
+  --line-shift: calc((var(--line-gap) + var(--line-height)) / 2);
+
   position: relative;
   display: none;
   width: 44px;
@@ -873,12 +885,12 @@ svg path {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--line-gap);
   border: 1px solid var(--text-primary);
   border-radius: 50%;
   transition: border-color var(--transition-set);
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     display: flex;
   }
 }
@@ -889,17 +901,17 @@ svg path {
 }
 
 .burger--active .burger__line:first-child {
-  position: absolute;
-
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
+  transform: translateY(var(--line-shift)) rotate(45deg);
 }
 
 .burger--active .burger__line:last-child {
-  position: absolute;
+  transform: translateY(calc(var(--line-shift) * -1)) rotate(-45deg);
+}
 
-  top: 50%;
-  transform: translateY(-50%) rotate(-45deg);
+@media (prefers-reduced-motion: reduce) {
+  .burger__line {
+    transition: none;
+  }
 }
 
 .more-button {
@@ -1010,4 +1022,8 @@ svg path {
 
 .product-modal__note svg {
   flex-shrink: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

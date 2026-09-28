@@ -837,6 +837,12 @@ svg path {
   }
 }
 
+.is-revealed {
+  @media (max-width: 1024px) {
+    display: list-item !important;
+  }
+}
+
 .catalog-link {
   @media (max-width: 1024px) {
     display: none;
@@ -901,6 +907,9 @@ svg path {
 
   @media (max-width: 1024px) {
     display: flex;
+  }
 
+  &[hidden] {
+    display: none;
   }
 }

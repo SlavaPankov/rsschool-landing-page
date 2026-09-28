@@ -352,13 +352,15 @@ svg path {
     gap: 100px;
     transform: translateX(-101%);
     background-color: var(--bg-page);
-    transition: transform var(--transition-set), background-color var(--transition-set);
+    opacity: 0;
+    transition: transform var(--transition-set), background-color var(--transition-set), opacity var(--transition-set);
     z-index: 2;
   }
 }
 
 .nav--open {
   transform: translateX(0);
+  opacity: 1;
 }
 
 .nav-list {
